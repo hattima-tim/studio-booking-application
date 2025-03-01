@@ -3,6 +3,7 @@ import { Button } from "./components/ui/button";
 import mockData, { IStudio } from "./data/mockData";
 import SearchBar from "./components/Search";
 import { useState } from "react";
+import RadiusSearch from "./components/RadiusSearch";
 
 function App() {
   const [filteredStudios, setFilteredStudios] = useState<IStudio[]>(
@@ -26,6 +27,11 @@ function App() {
           <SearchBar
             setFilteredStudios={setFilteredStudios}
             allStudios={mockData.studios}
+          />
+
+          <RadiusSearch
+            studios={mockData.studios}
+            setFilteredStudios={setFilteredStudios}
           />
         </div>
       </div>
