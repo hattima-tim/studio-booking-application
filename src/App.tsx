@@ -1,5 +1,8 @@
+import StudioList from "./components/StudioList";
+import mockData from "./data/mockData";
+
 function App() {
-  return <div></div>;
+  return <StudioList studios={mockData.studios} />;
 }
 
 export default App;
