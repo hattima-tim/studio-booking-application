@@ -1,8 +1,8 @@
 import { Clock, MapPin, Star } from "lucide-react";
-import { IStudio } from "../types/studio";
 import { Badge } from "./ui/badge";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
+import { IStudio } from "@/data/mockData";
 
 const StudioCard = ({ studio }: { studio: IStudio }) => {
   const renderStars = (rating: number) => {

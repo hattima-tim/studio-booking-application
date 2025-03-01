@@ -1882,3 +1882,9 @@ const mockData = {
 };
 
 export default mockData;
+
+export type IStudioData = {
+  studios: (typeof mockData.studios)[0][];
+};
+
+export type IStudio = (typeof mockData.studios)[0];
