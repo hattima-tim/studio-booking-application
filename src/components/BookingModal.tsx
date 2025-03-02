@@ -46,19 +46,12 @@ export default function BookingModal({
 
   useEffect(() => {
     if (date) {
-      // Generate time slots based on studio availability
       const slots = generateTimeSlots(
         studio.Availability.Open,
         studio.Availability.Close
       );
 
-      // Check which slots are already booked
-      const bookedSlots = getBookedSlots(studio.Id, date);
-
-      // Filter out booked slots
-      const available = slots.filter((slot) => !bookedSlots.includes(slot));
-
-      setAvailableTimeSlots(available);
+      setAvailableTimeSlots(slots);
       setTimeSlot("");
     }
   }, [date, studio]);
@@ -80,10 +73,8 @@ export default function BookingModal({
 
       slots.push(`${formattedHour}:${formattedMinute}`);
 
-      // Add 1 hour for each slot
       currentHour += 1;
 
-      // If we've gone past 23:59, reset to 00:00
       if (currentHour >= 24) {
         currentHour = 0;
       }
@@ -109,7 +100,6 @@ export default function BookingModal({
   const handleSubmit = () => {
     setBookingError(null);
 
-    // Validate form
     if (!date) {
       setBookingError("Please select a date");
       return;
@@ -147,7 +137,6 @@ export default function BookingModal({
       return;
     }
 
-    // Create booking object
     const booking: Booking = {
       id: `booking-${Date.now()}`,
       studioId: studio.Id,
@@ -161,7 +150,6 @@ export default function BookingModal({
       createdAt: new Date().toISOString(),
     };
 
-    // Save to local storage
     const existingBookings = JSON.parse(
       localStorage.getItem("studioBookings") || "[]"
     );
@@ -170,7 +158,6 @@ export default function BookingModal({
       JSON.stringify([...existingBookings, booking])
     );
 
-    // Show success message
     setBookingSuccess(true);
     setIsSubmitting(false);
   };
