@@ -35,7 +35,7 @@ const StudioCard = ({ studio }: { studio: IStudio }) => {
   };
 
   return (
-    <Card key={studio.Id} className="overflow-hidden">
+    <Card key={studio.Id} className="overflow-hidden shadow-muted">
       <div className="aspect-video relative bg-muted">
         <StudioPlaceholder name={studio.Name} />
         <Badge className="absolute top-2 right-2">{studio.Type}</Badge>

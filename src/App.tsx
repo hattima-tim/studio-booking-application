@@ -21,27 +21,29 @@ function App() {
 
   return (
     <main className="container mx-auto py-8 px-4">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Studio Booking</h1>
-        <Button
-          variant="outline"
-          onClick={() => (window.location.href = "/bookings")}
-        >
-          View My Bookings
-        </Button>
-      </div>
+      <div className="sticky top-0 z-10 bg-white p-1">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Studio Booking</h1>
+          <Button
+            variant="outline"
+            onClick={() => (window.location.href = "/bookings")}
+          >
+            View My Bookings
+          </Button>
+        </div>
 
-      <div className="mb-8">
-        <div className="flex flex-col md:flex-row gap-4 mb-4">
-          <SearchBar
-            setFilteredStudios={setFilteredStudios}
-            allStudios={mockData.studios}
-          />
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row gap-4 mb-4">
+            <SearchBar
+              setFilteredStudios={setFilteredStudios}
+              allStudios={mockData.studios}
+            />
 
-          <RadiusSearch
-            studios={mockData.studios}
-            setFilteredStudios={setFilteredStudios}
-          />
+            <RadiusSearch
+              studios={mockData.studios}
+              setFilteredStudios={setFilteredStudios}
+            />
+          </div>
         </div>
       </div>
 
