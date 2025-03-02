@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 import type { Booking } from "@/types/booking";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { IStudio } from "@/data/mockData";
+import { useNavigate } from "react-router";
 
 interface BookingModalProps {
   studio: IStudio;
@@ -33,6 +34,7 @@ export default function BookingModal({
   isOpen,
   onClose,
 }: BookingModalProps) {
+  const navigate = useNavigate();
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [timeSlot, setTimeSlot] = useState<string>("");
   const [name, setName] = useState("");
@@ -233,7 +235,7 @@ export default function BookingModal({
               <Button variant="outline" onClick={handleClose}>
                 Close
               </Button>
-              <Button onClick={() => (window.location.href = "/bookings")}>
+              <Button onClick={() => navigate("/bookings")}>
                 View My Bookings
               </Button>
             </div>
