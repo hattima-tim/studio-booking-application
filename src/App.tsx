@@ -2,13 +2,22 @@ import StudioList from "./components/StudioList";
 import { Button } from "./components/ui/button";
 import mockData, { IStudio } from "./data/mockData";
 import SearchBar from "./components/Search";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RadiusSearch from "./components/RadiusSearch";
 
 function App() {
-  const [filteredStudios, setFilteredStudios] = useState<IStudio[]>(
-    mockData.studios
-  );
+  const [filteredStudios, setFilteredStudios] = useState<IStudio[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setFilteredStudios(mockData.studios);
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <main className="container mx-auto py-8 px-4">
@@ -36,7 +45,11 @@ function App() {
         </div>
       </div>
 
-      {filteredStudios.length === 0 ? (
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+        </div>
+      ) : filteredStudios.length === 0 ? (
         <div className="text-center py-12">
           <h2 className="text-2xl font-semibold mb-2">No studios found</h2>
           <p className="text-muted-foreground">
