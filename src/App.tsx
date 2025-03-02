@@ -5,6 +5,7 @@ import SearchBar from "./components/Search";
 import { useEffect, useState } from "react";
 import RadiusSearch from "./components/RadiusSearch";
 import { useNavigate } from "react-router";
+import { ThemeToggle } from "./components/theme-toggle";
 
 function App() {
   const navigate = useNavigate();
@@ -23,12 +24,15 @@ function App() {
 
   return (
     <main className="container mx-auto py-8 px-4">
-      <div className="sticky top-0 z-10 bg-white p-1">
+      <div className="sticky top-0 z-10 bg-background p-1">
         <div className="flex justify-between items-center mb-8 flex-wrap gap-2.5">
           <h1 className="text-3xl font-bold">StudioConnect</h1>
-          <Button variant="outline" onClick={() => navigate("/bookings")}>
-            View My Bookings
-          </Button>
+          <div className="flex gap-2">
+            <ThemeToggle />
+            <Button variant="outline" onClick={() => navigate("/bookings")}>
+              View My Bookings
+            </Button>
+          </div>
         </div>
 
         <div className="mb-8">
