@@ -22,6 +22,7 @@ import type { Booking } from "@/types/booking";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { IStudio } from "@/data/mockData";
 import { useNavigate } from "react-router";
+import { PopoverClose } from "@radix-ui/react-popover";
 
 interface BookingModalProps {
   studio: IStudio;
@@ -269,14 +270,16 @@ export default function BookingModal({
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      onSelect={setDate}
-                      disabled={(date) =>
-                        date < new Date(new Date().setHours(0, 0, 0, 0))
-                      }
-                    />
+                    <PopoverClose>
+                      <Calendar
+                        mode="single"
+                        selected={date}
+                        onSelect={setDate}
+                        disabled={(date) =>
+                          date < new Date(new Date().setHours(0, 0, 0, 0))
+                        }
+                      />
+                    </PopoverClose>
                   </PopoverContent>
                 </Popover>
               </div>
