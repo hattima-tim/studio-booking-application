@@ -72,6 +72,11 @@ h1 {
   line-height: 1.1;
 }
 
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
