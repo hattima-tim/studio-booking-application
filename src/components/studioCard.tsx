@@ -6,6 +6,7 @@ import { IStudio } from "@/data/mockData";
 import BookingModal from "./BookingModal";
 import { useState } from "react";
 import StudioPlaceholder from "./StudioImgPlaceholder";
+import { motion } from "framer-motion";
 
 const StudioCard = ({ studio }: { studio: IStudio }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,53 +36,68 @@ const StudioCard = ({ studio }: { studio: IStudio }) => {
   };
 
   return (
-    <Card key={studio.Id} className="overflow-hidden shadow-muted">
-      <div className="aspect-video relative bg-muted">
-        <StudioPlaceholder name={studio.Name} />
-        <Badge className="absolute top-2 right-2">{studio.Type}</Badge>
-      </div>
-      <CardContent className="p-4">
-        <div className="flex justify-between items-start mb-2">
-          <h2 className="text-xl font-semibold line-clamp-1">{studio.Name}</h2>
-          <div className="flex">{renderStars(studio.Rating)}</div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+        delay: 0.2,
+        type: "keyframes",
+        stiffness: 300,
+        damping: 24,
+      }}
+    >
+      <Card key={studio.Id} className="overflow-hidden shadow-muted">
+        <div className="aspect-video relative bg-muted">
+          <StudioPlaceholder name={studio.Name} />
+          <Badge className="absolute top-2 right-2">{studio.Type}</Badge>
         </div>
-        <div className="flex items-start gap-1 text-muted-foreground mb-2">
-          <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
-          <span className="text-sm line-clamp-1">
-            {studio.Location.Area}, {studio.Location.City}
-          </span>
-        </div>
-        <div className="flex items-center gap-1 text-muted-foreground mb-3">
-          <Clock className="h-4 w-4" />
-          <span className="text-sm">
-            {studio.Availability.Open} - {studio.Availability.Close}
-          </span>
-        </div>
-        <div className="mb-3">
-          <div className="flex flex-wrap gap-1">
-            {studio.Amenities.map((amenity, index) => (
-              <Badge key={index} variant="outline" className="text-xs">
-                {amenity}
-              </Badge>
-            ))}
+        <CardContent className="p-4">
+          <div className="flex justify-between items-start mb-2">
+            <h2 className="text-xl font-semibold line-clamp-1">
+              {studio.Name}
+            </h2>
+            <div className="flex">{renderStars(studio.Rating)}</div>
           </div>
-        </div>
-        <div className="flex justify-between items-center">
-          <div className="font-bold text-lg">
-            {studio.PricePerHour} {studio.Currency}/hr
+          <div className="flex items-start gap-1 text-muted-foreground mb-2">
+            <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
+            <span className="text-sm line-clamp-1">
+              {studio.Location.Area}, {studio.Location.City}
+            </span>
           </div>
-          <Button onClick={() => openBookingModal(studio)}>Book Now</Button>
-        </div>
-      </CardContent>
+          <div className="flex items-center gap-1 text-muted-foreground mb-3">
+            <Clock className="h-4 w-4" />
+            <span className="text-sm">
+              {studio.Availability.Open} - {studio.Availability.Close}
+            </span>
+          </div>
+          <div className="mb-3">
+            <div className="flex flex-wrap gap-1">
+              {studio.Amenities.map((amenity, index) => (
+                <Badge key={index} variant="outline" className="text-xs">
+                  {amenity}
+                </Badge>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-between items-center">
+            <div className="font-bold text-lg">
+              {studio.PricePerHour} {studio.Currency}/hr
+            </div>
+            <Button onClick={() => openBookingModal(studio)}>Book Now</Button>
+          </div>
+        </CardContent>
 
-      {selectedStudio && (
-        <BookingModal
-          studio={selectedStudio}
-          isOpen={isModalOpen}
-          onClose={closeBookingModal}
-        />
-      )}
-    </Card>
+        {selectedStudio && (
+          <BookingModal
+            studio={selectedStudio}
+            isOpen={isModalOpen}
+            onClose={closeBookingModal}
+          />
+        )}
+      </Card>
+    </motion.div>
   );
 };
 
