@@ -22,7 +22,7 @@ function App() {
   return (
     <main className="container mx-auto py-8 px-4">
       <div className="sticky top-0 z-10 bg-white p-1">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-8 flex-wrap gap-2.5">
           <h1 className="text-3xl font-bold">StudioConnect</h1>
           <Button
             variant="outline"

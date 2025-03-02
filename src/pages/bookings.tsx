@@ -32,7 +32,7 @@ export default function BookingsPage() {
 
   return (
     <main className="container mx-auto py-8 px-4">
-      <div className="flex items-center mb-8 gap-4">
+      <div className="flex items-center mb-8 gap-4 flex-wrap">
         <Link to="/">
           <Button variant="outline" size="icon">
             <ArrowLeft className="h-4 w-4" />
