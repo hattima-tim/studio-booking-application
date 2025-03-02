@@ -4,8 +4,10 @@ import mockData, { IStudio } from "./data/mockData";
 import SearchBar from "./components/Search";
 import { useEffect, useState } from "react";
 import RadiusSearch from "./components/RadiusSearch";
+import { useNavigate } from "react-router";
 
 function App() {
+  const navigate = useNavigate();
   const [filteredStudios, setFilteredStudios] = useState<IStudio[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,10 +26,7 @@ function App() {
       <div className="sticky top-0 z-10 bg-white p-1">
         <div className="flex justify-between items-center mb-8 flex-wrap gap-2.5">
           <h1 className="text-3xl font-bold">StudioConnect</h1>
-          <Button
-            variant="outline"
-            onClick={() => (window.location.href = "/bookings")}
-          >
+          <Button variant="outline" onClick={() => navigate("/bookings")}>
             View My Bookings
           </Button>
         </div>
