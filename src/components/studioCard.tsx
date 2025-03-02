@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { IStudio } from "@/data/mockData";
 import BookingModal from "./BookingModal";
 import { useState } from "react";
+import StudioPlaceholder from "./StudioImgPlaceholder";
 
 const StudioCard = ({ studio }: { studio: IStudio }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,11 +37,7 @@ const StudioCard = ({ studio }: { studio: IStudio }) => {
   return (
     <Card key={studio.Id} className="overflow-hidden">
       <div className="aspect-video relative bg-muted">
-        <img
-          src={studio.Images[0] || "/placeholder.svg?height=200&width=400"}
-          alt={studio.Name}
-          className="object-cover w-full h-full"
-        />
+        <StudioPlaceholder name={studio.Name} />
         <Badge className="absolute top-2 right-2">{studio.Type}</Badge>
       </div>
       <CardContent className="p-4">
