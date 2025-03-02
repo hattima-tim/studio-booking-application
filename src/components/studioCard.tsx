@@ -3,8 +3,23 @@ import { Badge } from "./ui/badge";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { IStudio } from "@/data/mockData";
+import BookingModal from "./BookingModal";
+import { useState } from "react";
 
 const StudioCard = ({ studio }: { studio: IStudio }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedStudio, setSelectedStudio] = useState<IStudio | null>(null);
+
+  const openBookingModal = (studio: IStudio) => {
+    setSelectedStudio(studio);
+    setIsModalOpen(true);
+  };
+
+  const closeBookingModal = () => {
+    setIsModalOpen(false);
+    setSelectedStudio(null);
+  };
+
   const renderStars = (rating: number) => {
     return Array(5)
       .fill(0)
@@ -63,9 +78,17 @@ const StudioCard = ({ studio }: { studio: IStudio }) => {
           <div className="font-bold text-lg">
             {studio.PricePerHour} {studio.Currency}/hr
           </div>
-          <Button>Book Now</Button>
+          <Button onClick={() => openBookingModal(studio)}>Book Now</Button>
         </div>
       </CardContent>
+
+      {selectedStudio && (
+        <BookingModal
+          studio={selectedStudio}
+          isOpen={isModalOpen}
+          onClose={closeBookingModal}
+        />
+      )}
     </Card>
   );
 };
