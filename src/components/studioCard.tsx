@@ -59,16 +59,11 @@ const StudioCard = ({ studio }: { studio: IStudio }) => {
         </div>
         <div className="mb-3">
           <div className="flex flex-wrap gap-1">
-            {studio.Amenities.slice(0, 3).map((amenity, index) => (
+            {studio.Amenities.map((amenity, index) => (
               <Badge key={index} variant="outline" className="text-xs">
                 {amenity}
               </Badge>
             ))}
-            {studio.Amenities.length > 3 && (
-              <Badge variant="outline" className="text-xs">
-                +{studio.Amenities.length - 3} more
-              </Badge>
-            )}
           </div>
         </div>
         <div className="flex justify-between items-center">
