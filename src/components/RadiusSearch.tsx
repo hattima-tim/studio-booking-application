@@ -2,6 +2,7 @@ import { Navigation } from "lucide-react";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 import { IStudio } from "@/data/mockData";
+import { toast } from "sonner";
 
 interface Props {
   studios: IStudio[];
@@ -70,9 +71,8 @@ const RadiusSearch = ({ studios, setFilteredStudios }: Props) => {
           });
           setSearchRadius(radius);
         },
-        (error) => {
-          console.error("Error getting location:", error);
-          alert(
+        () => {
+          toast.error(
             "Unable to access your location. Please check your browser settings and try again."
           );
         }
