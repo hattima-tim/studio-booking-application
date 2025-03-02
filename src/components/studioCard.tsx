@@ -4,13 +4,15 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { IStudio } from "@/data/mockData";
 import BookingModal from "./BookingModal";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import StudioPlaceholder from "./StudioImgPlaceholder";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const StudioCard = ({ studio }: { studio: IStudio }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStudio, setSelectedStudio] = useState<IStudio | null>(null);
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: true, amount: "some" });
 
   const openBookingModal = (studio: IStudio) => {
     setSelectedStudio(studio);
@@ -37,16 +39,18 @@ const StudioCard = ({ studio }: { studio: IStudio }) => {
 
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      exit={{ opacity: 0, y: 20 }}
       transition={{
         duration: 0.5,
-        ease: "easeInOut",
-        delay: 0.2,
+        ease: "easeIn",
         type: "keyframes",
         stiffness: 300,
         damping: 24,
       }}
+      layout
     >
       <Card key={studio.Id} className="overflow-hidden shadow-muted">
         <div className="aspect-video relative bg-muted">
@@ -88,7 +92,6 @@ const StudioCard = ({ studio }: { studio: IStudio }) => {
             <Button onClick={() => openBookingModal(studio)}>Book Now</Button>
           </div>
         </CardContent>
-
         {selectedStudio && (
           <BookingModal
             studio={selectedStudio}
